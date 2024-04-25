@@ -1,17 +1,23 @@
-import { useState } from "react";
-import ArticleList from "./components/ArticleList/ArticleList";
-import Header from "./components/Header/Header";
-import Form from "./components/Form/Form";
+import { useState } from "react"
 
-export default function App() {
-  const [user, setUser] = useState();
-  const hasUser = Boolean(user);
+import Header from "./components/Header/Header"
+import ArticleList from "./components/ArticleList/ArticleList"
+import Form from "./components/Form/Form"
+
+const App = () => {
+  const [user, setUser] = useState()
+
+  const submitForm = (user) => {
+    setUser(user)
+  }
+
   return (
-    <div className="h-screen">
-      <Header user={user} />
-
-      {hasUser && <ArticleList />}
-      {hasUser || <Form onSubmit={setUser} />}
+    <div className="w-screen h-screen sm:px-5 flex flex-col justify-start items-center">
+      <Header user={user?.name} />
+      { !!user && <ArticleList /> }
+      { !!user || <Form onSubmit={submitForm} /> }
     </div>
-  );
+  )
 }
+
+export default App
